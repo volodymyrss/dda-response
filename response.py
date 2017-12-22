@@ -1,5 +1,5 @@
 import ddosa
-import pyfits
+import astropy.io.fits as fits
 import heaspa
 from numpy import *
 import sys
