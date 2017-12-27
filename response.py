@@ -43,7 +43,7 @@ class ResponseRev(ddosa.DataAnalysis):
         r2=self.r2
         depth_limit=self.depth_limit
 
-        cmd="bash "+os.environ['IBISMM_PROCESS_ROOT']+"/run_gen.sh response_3d_diff.fits "+self.input_lut2.lut2_1d.get_path()+" 0.1 %.5lg %.5lg %.5lg %i"%(r1,r2,depth_limit,self.nchan)
+        cmd="bash "+os.environ['IBISMM_PROCESS_ROOT']+"/run_gen.sh "+os.environ['IBISMM_PROCESS_DATA']+"/response_3d_diff.fits "+self.input_lut2.lut2_1d.get_path()+" 0.1 %.5lg %.5lg %.5lg %i"%(r1,r2,depth_limit,self.nchan)
         print cmd
         os.system(cmd)
 
