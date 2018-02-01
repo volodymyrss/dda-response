@@ -18,7 +18,7 @@ import timesystem as ts
 class ResponseRev(ddosa.DataAnalysis):
     version="v3"
 
-    input_lut2=eddosa.FinalizeLUT2
+    input_lut2=eddosa.FinalizeLUT2P4
 
     copy_cached_input=False
 
@@ -69,6 +69,8 @@ class OGIPResponse(ddosa.DataAnalysis):
             emin,emax=(lambda x:(x['E_MIN'],x['E_MAX']))(pyfits.open("/unsaved_data/savchenk/rmf_62bands.fits")['ISGR-EBDS-MOD'].data)
         elif self.input_response.nchan==256:
             emin,emax=(lambda x:(x['E_MIN'],x['E_MAX']))(pyfits.open(os.environ['CURRENT_IC']+"/ic/ibis/mod/isgr_ebds_mod_0001.fits")['ISGR-EBDS-MOD'].data)
+
+        print("nchan",emin.shape)
 
         de=emax-emin
         #de=ones_like(de)*0.4787
