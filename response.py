@@ -66,7 +66,7 @@ class OGIPResponse(ddosa.DataAnalysis):
         area_factor=450.
 
         if self.input_response.nchan==62:
-            emin,emax=(lambda x:(x['E_MIN'],x['E_MAX']))(pyfits.open("/unsaved_data/savchenk/rmf_62bands.fits")['ISGR-EBDS-MOD'].data)
+            emin,emax=(lambda x:(x['E_MIN'],x['E_MAX']))(pyfits.open("/unsaved_data/savchenk/rmf_62bands.fits")['ISGR-EBDS-MOD'].data) # we should put this in IC or smth
         elif self.input_response.nchan==256:
             emin,emax=(lambda x:(x['E_MIN'],x['E_MAX']))(pyfits.open(os.environ['CURRENT_IC']+"/ic/ibis/mod/isgr_ebds_mod_0001.fits")['ISGR-EBDS-MOD'].data)
 
