@@ -44,7 +44,7 @@ class ResponseRev(ddosa.DataAnalysis):
         depth_limit=self.depth_limit
 
         cmd="bash "+os.environ['IBISMM_PROCESS_ROOT']+"/run_gen.sh "+os.environ['IBISMM_PROCESS_DATA']+"/response_3d_diff.fits "+self.input_lut2.lut2_1d.get_path()+" 0.1 %.5lg %.5lg %.5lg %i"%(r1,r2,depth_limit,self.nchan)
-        print cmd
+        print(cmd)
         os.system(cmd)
 
         self.out_response_3d_reconstructed=da.DataFile("out_response_3d_reconstructed.fits")
@@ -70,7 +70,7 @@ class OGIPResponse(ddosa.DataAnalysis):
         elif self.input_response.nchan==256:
             emin,emax=(lambda x:(x['E_MIN'],x['E_MAX']))(pyfits.open(os.environ['CURRENT_IC']+"/ic/ibis/mod/isgr_ebds_mod_0001.fits")['ISGR-EBDS-MOD'].data)
 
-        print("nchan",emin.shape)
+        print(("nchan",emin.shape))
 
         de=emax-emin
         #de=ones_like(de)*0.4787
@@ -88,7 +88,7 @@ class OGIPResponse(ddosa.DataAnalysis):
             rmap=r3d[:,:,rt1:rt2].sum(2)/outer(m_de,ones_like(de))/area_factor
             #rmap=r3d[:,:,rt1:rt2].sum(2)/outer(de,ones_like(de))
 
-            print(rmap.shape)
+            print((rmap.shape))
 
             rmap[:1,:]=0
             rmap[-2:,:]=0
