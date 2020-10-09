@@ -1,6 +1,6 @@
 import ddosa
 import astropy.io.fits as pyfits
-import heaspa
+import ogip.spec
 from numpy import *
 import sys
 import os
@@ -98,13 +98,13 @@ class OGIPResponse(ddosa.DataAnalysis):
             key="rt%.5lg_%.5lg"%(rt1,rt2)
 
             rmffn="rmf_%s.fits"%key
-            heaspa.RMF(emin,emax,m_emin,m_emax,rmap).write(rmffn)
+            ogip.spec.RMF.from_arrays(m_emin,m_emax,rmap, emin, emax).to_fits(rmffn)
 
             #rmap_normalized=rmap/outer(ones_like(de),rmap.sum(1))
 
-            #heaspa.RMF(emin,emax,emin,emax,rmap_normalized).write("rmf_normalized.fits")
+            #ogip.spec.RMF(emin,emax,emin,emax,rmap_normalized).write("rmf_normalized.fits")
 
-            heaspa.PHA(rmap[50,:]*100,rmap[50,:]*5,1).write("pha_%s.fits"%key)
+            ogip.spec.PHAI.from_arrays(1, rate=rmap[50,:]*100,stat_err=rmap[50,:]*5).to_fits("pha_%s.fits"%key)
             return rmffn
 
         self.rmf_16_116=da.DataFile(write_response(16,116))
